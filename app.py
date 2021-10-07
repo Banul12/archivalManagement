@@ -13,13 +13,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://banul:2285553a$@localho
 app.config['SECRET_KEY'] = "random string"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
-class Students(db.Model):
-    __tablename__ = "students"
-    id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
-    batch_title = db.Column(db.Integer, nullable=False)
-    date_created = db.Column(db.DATE, default=datetime.now())
 
 class Notification(db.Model):
     __tablename__ = "notification"
@@ -45,10 +38,7 @@ class Timetable(db.Model):
 # def index():
 #     notification = Notification.query.all()
 #     return render_template("note.html",  notification=notification)
-@app.route("/batch/<bt>", methods=['GET'])
-def batch_filter(bt):
-    students = Students.query.filter(Students.batch_title == bt).all()
-    return render_template("intro.html", students=students)
+
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
