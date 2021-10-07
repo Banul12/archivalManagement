@@ -1,0 +1,36 @@
+{% extends "master_template.html" %}
+{%block title%}
+  This is Intro
+{%endblock%}
+
+{% block body%}
+  <h2> Welcome</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Session</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+         <th>Thursday</th>
+        <th>Friday</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {%for time in timetable%}
+      <tr>
+        <td>{{time.session}}</td>
+        <td>{{time.monday}}</td>
+        <td>{{time.tuesday}}</td>
+         <td>{{time.wednesday}}</td>
+        <td>{{time.thursday}}</td>
+        <td>{{time.friday}}</td>
+
+
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  <br><br><a href="/time"><button>View Timetable</button></a>
+  {%endblock%}

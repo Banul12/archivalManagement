@@ -1,0 +1,139 @@
+{% extends "master_template.html" %}
+{%block title%}
+  Dashboard
+{%endblock%}
+
+{%block body%}
+
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<style>
+ .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  height: 250px;
+
+ 
+}
+.card2 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+ 
+ 
+}
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 2px;
+}
+</style>
+<body>
+
+   <div class="container">
+      <div class="card">
+     
+        <canvas id="myChart" ></canvas>
+
+      </div>
+    </div>
+  
+
+<script>
+
+
+
+var xValues = ["Timetables", "Notifications"];
+var yValues = ["{{noteCount}}", "{{timeCount}}"]
+var barColors = [
+  "#b91d47",
+  "#00aba9"
+];
+
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Dashboard"
+    }
+  }
+});
+</script>
+<div class="container">
+  <div class="card2">
+    <h2>Timetable</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Session</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+       <th>Thursday</th>
+      <th>Friday</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {%for time in timetable%}
+    <tr>
+      <td>{{time.session}}</td>
+      <td>{{time.monday}}</td>
+      <td>{{time.tuesday}}</td>
+       <td>{{time.wednesday}}</td>
+      <td>{{time.thursday}}</td>
+      <td>{{time.friday}}</td>
+
+
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+  </div></div>
+<br><br>
+
+<div class="container">
+  <div class="card2">
+    <h2>Notifications</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>title</th>
+      <th>reference_num</th> 
+      <th>content</th>
+      <th> Action </th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {%for note in notification%}
+    <tr>
+      <td>{{note.title}}</td>
+      <td>{{note.reference_num}}</td>
+      <td>{{note.content}}</td>
+      <td><a href="/update/{{note.id}}">update</a>, <a href="/delete/{{note.id}}">delete</a></td> 
+      <td><a href="/form/{{note.id}}"><button>view</button></a></td>
+      
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+  </div>
+</div>
+</body>
+</html>
+ {%endblock%}

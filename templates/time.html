@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<style>
+@media print {
+  #printPageButton {
+    display: none;
+  }
+}
+</style>
+<body>
+
+<div class="form-horizental" action="{{url_for('time', id = id)}}" method="post">
+    <h1><center>Department of Computer & Information Technology <br>University Of Balochistan,Quetta</center></h1>
+	<h2><center>Tentitive Timetable September 2017(Morning)</center></h2>
+	<table border="5" cellspacing="0" align="center">
+	<thead>
+      <tr>
+        <th>Class</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+         <th>Thursday</th>
+        <th>Friday</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      {%for t in time%}
+      <tr>
+        <td>{{t.session}}</td>
+        <td>{{t.monday}}</td>
+        <td>{{t.tuesday}}</td>
+         <td>{{t.wednesday}}</td>
+        <td>{{t.thursday}}</td>
+        <td>{{t.friday}}</td>
+
+      </tr>
+      {%endfor%}
+    </tbody>
+
+
+
+	</table>
+     </br>
+    </br>
+        <button id="printPageButton" type="button" onclick="window.print()">Print Timetable</button>
+</div>
+</body>
+
+</html>
+
+
+
+

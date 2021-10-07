@@ -1,0 +1,30 @@
+{% extends "master_template.html" %}
+{%block title%}
+  This is Intro
+{%endblock%}
+
+{% block body%}
+  <h2><a href="/"> Back </a>, Welcome</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>title</th>
+        <th>reference_num</th>
+        <th>content</th>
+        <th> Action </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {%for note in notification%}
+      <tr>
+        <td>{{note.title}}</td>
+        <td>{{note.ref_num}}</td>
+        <td>{{note.content}}</td>
+
+        <td><a href="/update/{{note.id}}">update</a>, <a href="/delete/{{note.id}}">delete</a></td> 
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  {%endblock%}
