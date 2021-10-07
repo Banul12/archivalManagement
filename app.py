@@ -123,7 +123,7 @@ def insert():
         return render_template("note.html", notification=notification)
     return render_template("add_note.html")
 
-
+ 
 
 @app.route("/view", methods=['GET', 'POST'])
 def view():
