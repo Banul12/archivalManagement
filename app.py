@@ -144,18 +144,6 @@ def insert():
 #         return render_template("note.html", notification=notification)
 #     return render_template("add_note.html")
 
-# @app.route("/intro", methods=['POST', 'GET'])
-# def intro():
-#     if request.method == "POST":
-#         title = request.form.get("title")
-#         reference_num = request.form.get("reference_num")
-#         content = request.form.get("content")
-#         # Get all records again
-#         notification = Notification.query.all()
-#         return render_template("intro.html", notification=notification)
-#     else:
-#         notification = Notification.query.all()
-#         return render_template("intro.html", notification=notification)
 @app.route("/update/<int:id>/", methods=['POST','GET'])
 def update(id):
     if request.method == "POST":
