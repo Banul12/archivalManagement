@@ -1,10 +1,35 @@
 {% extends "master_template.html" %}
 {%block title%}
-  This is Intro
+  Notifications
 {%endblock%}
 
 {% block body%}
-  <h2><a href="/"> Back </a>, Welcome</h2>
+  <style>
+   .printNotButton {
+		
+		background-color: #4CAF50; /* Green */
+		border: none;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 2px 2px;
+		transition-duration: 0.4s;
+		cursor: pointer;
+		background-color: white; 
+		color: black; 
+		border: 2px solid #0d90db;
+
+	}
+.printNotButton:hover {
+  background-color: #10a2f7;
+  color: white;
+}
+
+  </style>
+  
   <table class="table">
     <thead>
       <tr>
@@ -21,9 +46,12 @@
         <td>{{note.title}}</td>
         <td>{{note.reference_num}}</td>
         <td>{{note.content}}</td>
-        <td><a href="/update/{{note.id}}">update</a>, <a href="/delete/{{note.id}}">delete</a></td> 
-        <td><a href="/form/{{note.id}}"><button>view</button></a></td>
+        <!-- <td><a href="/update/{{note.id}}">update</a>, <a href="/delete/{{note.id}}">delete</a></td>  -->
+        <!-- <td><a href="/form/{{note.id}}"><button>view</button></a></td> -->
         
+        <td><a href="/update/{{note.id}}"><input id="printNotButton" class ="printNotButton" type="button"value="Update"</button></a> </td>
+         <td> <a href="/delete/{{note.id}}"><input id="printNotButton" class ="printNotButton" type="button"value="Delete"</button></a></td>
+          <td><a href="/form/{{note.id}}"><button id="printNotButton" class ="printNotButton" type="button"value="View">view</button></a></td>
       </tr>
       {%endfor%}
     </tbody>

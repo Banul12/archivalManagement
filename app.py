@@ -67,6 +67,11 @@ def show():
     timetable = Timetable.query.all()
     return render_template("table.html", timetable=timetable)
 
+@app.route('/view', methods=['GET', 'POST'])
+def view():
+    notification = Notification.query.all()
+    return render_template("note.html", notification=notification)
+
 @app.route("/add_table", methods=['GET', 'POST'])
 def add_table():
     if request.method == "POST":
@@ -125,32 +130,32 @@ def insert():
 
  
 
-@app.route("/view", methods=['GET', 'POST'])
-def view():
-    if request.method == "POST":
-        title = request.form.get("title")
-        reference_num = request.form.get("reference_num")
-        content = request.form.get("content")
-        # Creat new record
-        note= Notification(title = title, reference_num = reference_num, content = content)
-        db.session.add(note)
-        db.session.commit()
-        notification = Notification.query.all()
-        return render_template("note.html", notification=notification)
-    return render_template("add_note.html")
+# @app.route("/view", methods=['GET', 'POST'])
+# def view():
+#     if request.method == "POST":
+#         title = request.form.get("title")
+#         reference_num = request.form.get("reference_num")
+#         content = request.form.get("content")
+#         # Creat new record
+#         note= Notification(title = title, reference_num = reference_num, content = content)
+#         db.session.add(note)
+#         db.session.commit()
+#         notification = Notification.query.all()
+#         return render_template("note.html", notification=notification)
+#     return render_template("add_note.html")
 
-@app.route("/intro", methods=['POST', 'GET'])
-def intro():
-    if request.method == "POST":
-        title = request.form.get("title")
-        reference_num = request.form.get("reference_num")
-        content = request.form.get("content")
-        # Get all records again
-        notification = Notification.query.all()
-        return render_template("intro.html", notification=notification)
-    else:
-        notification = Notification.query.all()
-        return render_template("intro.html", notification=notification)
+# @app.route("/intro", methods=['POST', 'GET'])
+# def intro():
+#     if request.method == "POST":
+#         title = request.form.get("title")
+#         reference_num = request.form.get("reference_num")
+#         content = request.form.get("content")
+#         # Get all records again
+#         notification = Notification.query.all()
+#         return render_template("intro.html", notification=notification)
+#     else:
+#         notification = Notification.query.all()
+#         return render_template("intro.html", notification=notification)
 @app.route("/update/<int:id>/", methods=['POST','GET'])
 def update(id):
     if request.method == "POST":
@@ -166,19 +171,19 @@ def update(id):
     else:
         note = Notification.query.filter(Notification.id == id).first()
         return render_template("update.html", note=note, id=id)
-@app.route("/delete/<int:id>/", methods=['POST','GET'])
-def delete(id):
-    if request.method=="POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        program = request.form.get("program")
-        stud = Students.query.filter_by(id = id).delete()
-        db.session.delete(id)
-        db.session.commit()
-        return redirect(url_for('intro'))
-    else:
-        stud = Students.query.filter(Students.id == id).delete()
-        return render_template("add_student.html", stud=stud, id=id)
+# @app.route("/delete/<int:id>/", methods=['POST','GET'])
+# def delete(id):
+#     if request.method=="POST":
+#         name = request.form.get("name")
+#         email = request.form.get("email")
+#         program = request.form.get("program")
+#         stud = Students.query.filter_by(id = id).delete()
+#         db.session.delete(id)
+#         db.session.commit()
+#         return redirect(url_for('intro'))
+#     else:
+#         stud = Students.query.filter(Students.id == id).delete()
+#         return render_template("add_student.html", stud=stud, id=id)
 
 if __name__ == "__main__":
     app.run(debug=True)
