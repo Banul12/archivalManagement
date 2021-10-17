@@ -155,23 +155,23 @@ def update(id):
         note.ref_num = reference_num
         note.content = content
         db.session.commit()
-        return redirect(url_for('intro'))
+        return redirect(url_for('view'))
     else:
         note = Notification.query.filter(Notification.id == id).first()
         return render_template("update.html", note=note, id=id)
-# @app.route("/delete/<int:id>/", methods=['POST','GET'])
-# def delete(id):
-#     if request.method=="POST":
+@app.route("/delete/<int:id>/", methods=['DELETE'])
+def delete(id):
+     if request.method=="POST":
 #         name = request.form.get("name")
 #         email = request.form.get("email")
 #         program = request.form.get("program")
 #         stud = Students.query.filter_by(id = id).delete()
-#         db.session.delete(id)
-#         db.session.commit()
-#         return redirect(url_for('intro'))
-#     else:
-#         stud = Students.query.filter(Students.id == id).delete()
-#         return render_template("add_student.html", stud=stud, id=id)
+         db.session.delete(id)
+         db.session.commit()
+         return render_template("note.html",id=id)
+     else:
+          note = Notification.query.filter(Notification.id == id).delete()
+          return render_template("add_note.html", note=note, id=id)
 
 if __name__ == "__main__":
     app.run(debug=True)
