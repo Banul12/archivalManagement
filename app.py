@@ -33,16 +33,9 @@ class Timetable(db.Model):
     friday = db.Column(db.String(100), nullable=False)
 
 
-
-# @app.route("/", methods=['GET', 'POST'])
-# def index():
-#     notification = Notification.query.all()
-#     return render_template("note.html",  notification=notification)
-
-
 @app.route("/", methods=['GET', 'POST'])
 def index():
-    # session.query(Notification).join(timedelta).count()
+   
     notification = Notification.query.all()
     timetable = Timetable.query.all()
     noteCount = Notification.query.count()
@@ -110,7 +103,7 @@ def Go():
 
 @app.route("/form/<int:id>", methods=['GET', 'POST'])
 def form(id):
-    #note = Notification.query.all()
+   
     note = Notification.query.filter_by(id = id).first()
     return render_template("form.html", note=note, id=id)
 
@@ -127,22 +120,6 @@ def insert():
         notification = Notification.query.all()
         return render_template("note.html", notification=notification)
     return render_template("add_note.html")
-
- 
-
-# @app.route("/view", methods=['GET', 'POST'])
-# def view():
-#     if request.method == "POST":
-#         title = request.form.get("title")
-#         reference_num = request.form.get("reference_num")
-#         content = request.form.get("content")
-#         # Creat new record
-#         note= Notification(title = title, reference_num = reference_num, content = content)
-#         db.session.add(note)
-#         db.session.commit()
-#         notification = Notification.query.all()
-#         return render_template("note.html", notification=notification)
-#     return render_template("add_note.html")
 
 @app.route("/update/<int:id>/", methods=['POST','GET'])
 def update(id):
@@ -162,10 +139,6 @@ def update(id):
 @app.route("/delete/<int:id>/", methods=['DELETE'])
 def delete(id):
      if request.method=="POST":
-#         name = request.form.get("name")
-#         email = request.form.get("email")
-#         program = request.form.get("program")
-#         stud = Students.query.filter_by(id = id).delete()
          db.session.delete(id)
          db.session.commit()
          return render_template("note.html",id=id)
