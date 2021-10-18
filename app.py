@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
-##postgress
+
 db = SQLAlchemy()
 app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://banul:2285553a$@localhost:3306/python_for_web"
 app.config['SECRET_KEY'] = "random string"
