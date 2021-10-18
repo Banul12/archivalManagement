@@ -5,4 +5,5 @@ management, you can create any paper work you like with ease according to your d
 Searching through any document created is also very easy. Any organisation needs organising its important files in a structured manner.
 Shahida - my partner in this project - and myself has created this repository to help developers further add into it and create a complete
 and sofisticated solution which any organisation/department can use. 
+We have used Flask python for the back-end and HTML, CSS, and a little bit of JS for the front-end.
 Thank you so much.
